@@ -11,4 +11,7 @@ COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 WORKDIR /var/www/html
 
+COPY . .
+RUN composer install
+
 CMD ["/usr/bin/supervisord"]
