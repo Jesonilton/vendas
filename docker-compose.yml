@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: docker/Dockerfile
+    container_name: laravel_app
+    volumes:
+      - ./backend:/var/www/html
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    working_dir: /var/www/html
+    # command: sh -c "php artisan queue:work"
+    networks:
+      - app-network
+
+  node:
+    build:
+      context: ./frontend
+      dockerfile: docker/Dockerfile
+    container_name: vue_app
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    working_dir: /app
+    command: sh -c "rm -rf node_modules/.vite dist && npm run dev"
+    depends_on:
+      - app
+    networks:
+      - app-network
+
+#no dbeaver, definir allowPublicKeyRetrieval=true
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
