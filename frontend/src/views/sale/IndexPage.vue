@@ -113,7 +113,7 @@
 import { currencyFormatBRL } from '@/utils/currency';
 import { ref, onMounted, computed } from 'vue'
 import * as bootstrap from 'bootstrap'
-import axios from 'axios'
+import axios from '@/axios'
 import Alert from '@/components/Alert.vue';
 import { ISeller } from '@/types/SellerTypes';
 import { IFormSale, ISale, ISalesFilter } from '@/types/SaleTypes';
