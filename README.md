@@ -1,64 +1,75 @@
-💼 Vendas
+# Vendas
 
-Sistema de controle de vendas com Laravel (API) e Vue 3 (Frontend).Este guia vai te ajudar a rodar o projeto localmente usando Docker.
+Sistema de gestão de vendedores e vendas com cálculo de comissão e envio de relatórios por e-mail.
 
-✨ Como iniciar o projeto
+## 🚀 Como executar o projeto
 
-Clone o repositório
-
+### 1. Clone o repositório
+```bash
 git clone https://github.com/Jesonilton/vendas.git
-cd vendas
+```
 
-Suba os containers com Docker Compose
-
+### 2. Suba os containers
+```bash
 docker-compose up -d
+```
 
-Acesse o container Laravel
-
+### 3. Configure o ambiente no container Laravel
+```bash
 docker exec -it laravel_app bash
-
-Configure o ambiente e prepare o banco
-
 cp .env.example .env
 php artisan migrate
 php artisan db:seed
 exit
+```
 
-♻️ Reinicie o container do Laravel
+### 4. Reinicie o serviço do Laravel
 
-O supervisor é executado dentro do container laravel_app. Como ele é iniciado antes da execução das migrations e seeders, é recomendável reiniciar o serviço Laravel para garantir que tudo funcione corretamente:
+O Supervisor é executado no container Laravel. Como o container é criado antes da execução das migrations, é recomendado reiniciar o serviço Laravel:
 
+```bash
 docker-compose down app
 docker-compose up -d app
+```
 
-✉️ Configuração de e-mail
+### 5. Configure credenciais de e-mail
 
-Configure as credenciais de e-mail no arquivo .env.
+Configure as variáveis de e-mail no arquivo `.env`. Exemplo usando [Mailtrap](https://mailtrap.io):
 
-💡 Sugestão: utilize Mailtrap para testes.
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=seu_usuario
+MAIL_PASSWORD=sua_senha
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=mailer@example.com
+MAIL_FROM_NAME="Laravel Mailtrap"
+```
 
-Teste o envio de e-mail acessando o container do laravel e executando o envio do email via tinker
+### 6. Teste o envio de e-mails
 
+```bash
 docker exec -it laravel_app bash
 php artisan tinker
+```
 
-Cole e execute o código abaixo no Tinker:
+Cole o código abaixo e pressione Enter:
 
+```php
 Mail::raw('Este é um teste de e-mail no Laravel', function ($message) {
-    $message->to('teste@gmail.com')
+    $message->to('seugmail@gmail.com')
             ->subject('Teste de e-mail');
 });
+```
 
-✔️ Verifique se o e-mail chegou na sua caixa de entrada.
+Verifique se o e-mail chegou na sua caixa de entrada.
 
-🌐 Acesso ao sistema
+### 7. Acesse o sistema
 
 Abra no navegador:
-
+```
 http://localhost:5173
+```
 
-✅ O usuário é criado automaticamente via seeder.Clique em Entrar e aproveite o sistema!
-
-🧑‍💻 Autor
-
-Feito por Jesonilton
+O usuário padrão é criado pela seed. Basta clicar em **"Entrar"** na tela inicial.
