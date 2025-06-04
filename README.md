@@ -89,3 +89,26 @@ docker-compose up -d app
 ```
 Tudo para garantir que a configuração do .env seja utilizada (Nem sempre isto é necessário)
 após isto, execute o passo 6
+
+### Extra
+
+no arquivo .env pode ser definido o nome e email do gestor. O sistema faz envio diário e automático de amails no horário também configurado no .env
+
+```env
+HOUR_TO_SEND_DAILY_EMAILS="23:55"
+MANAGER_NAME="Manager Name"
+MANAGER_EMAIL="email@email.email"
+```
+O supervisor está configurado no container do laravel e mantem os comandos necessários em execução. O arquivo de configuração é backend/supervisord.conf
+
+### Emails enviados
+
+Extrato de comissões
+![Extrato de comissões](./docs/assets/Email-1.png)
+
+
+Relatório de comissões ao vendedor
+![Relatório de comissões ao vendedor](./docs/assets/Email-2.png)
+
+Relatório de vendas ao gestor
+![Relatório de vendas ao gestor](./docs/assets/Email-3.png)
