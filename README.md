@@ -83,6 +83,7 @@ O laravel tem certos problemas com o cache ao alterar o .env. Se ao testar o env
 docker exec -it laravel_app bash
 php artisan config:clear
 php artisan cache:clear
+exit
 docker-compose down app
 docker-compose up -d app
 ```
