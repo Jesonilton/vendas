@@ -4,9 +4,10 @@ Sistema de gestão de vendedores e vendas com cálculo de comissão e envio de r
 
 ## 🚀 Como executar o projeto
 
-### 1. Clone o repositório
+### 1. Clone o repositório e acesse a pasta do projeto
 ```bash
 git clone https://github.com/Jesonilton/vendas.git
+cd vendas
 ```
 
 ### 2. Suba os containers
