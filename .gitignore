@@ -1,1 +1,5 @@
-mysql_data/*
+# Ignore tudo na pasta
+/mysql_data/*
+
+# Mas não ignore o .gitkeep
+!/mysql_data/.gitkeep
