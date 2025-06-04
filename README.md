@@ -24,6 +24,11 @@ php artisan db:seed
 exit
 ```
 
+Se tiver problemas com permissões:
+```bash
+sudo chmod 775 -R storage
+```
+
 ### 4. Reinicie o serviço do Laravel
 
 O Supervisor é executado no container Laravel. Como o container é criado antes da execução das migrations, é recomendado reiniciar o serviço Laravel:
