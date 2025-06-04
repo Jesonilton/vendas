@@ -73,3 +73,17 @@ http://localhost:5173
 ```
 
 O usuário padrão é criado pela seed. Basta clicar em **"Entrar"** na tela inicial.
+
+### Atenção:
+
+O laravel tem certos problemas com o cache ao alterar o .env. Se ao testar o envio pelo sistema o email não for enviado, verifique, na tabela failed_jobs no banco de dados, a coluna exception para entender o erro. Algumas vezes configurei o env mas a aplicação não capturou minhas alterações. Só foi possível ver na tabela failed_jobs. Se quiser remover o cache:
+
+```bash
+docker exec -it laravel_app bash
+php artisan config:clear
+php artisan cache:clear
+docker-compose down app
+docker-compose up -d app
+```
+Tudo para garantir que a configuração do .env seja utilizada (Nem sempre isto é necessário)
+após isto, execute o passo 6
